@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Blog Post — the.blog</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Mono:wght@400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="/css/page.css">
+</head>
+<body>
+
+  <div class="progress-bar" id="progress"></div>
+
+  <!-- HEADER -->
+  <header>
+    <div class="header-inner">
+      <a href="/" class="logo">sathwik<span>.</span>blog</a>
+      <nav>
+        <a href="/" class="nav-btn">← All Posts</a>
+        <a href="/?filter=tech" class="nav-btn">Technical</a>
+        <a href="/?filter=personal" class="nav-btn">Personal</a>
+        
+      </nav>
+      <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">
+          <span id="theme-icon">🌙</span>
+        </button>
+    </div>
+  </header>
+
+  <!-- BREADCRUMB -->
+  <div class="breadcrumb">
+    <a href="/">Home</a>
+    <span class="breadcrumb-sep">/</span>
+    <a href="#">Personal</a>        <!-- ← replace -->
+    <span class="breadcrumb-sep">/</span>
+    <span>Again...</span>         <!-- ← replace -->
+  </div>
+
+  <!-- ARTICLE HEADER -->
+  <div class="article-header">
+    <div class="article-meta-top">
+      <!-- change "tech" to "personal" for personal posts -->
+      <span class="tag personal">Personal</span>
+      <span class="dot">·</span>
+      <span class="article-date">March 10, 2026</span>   <!-- ← replace -->
+    </div>
+
+    <!-- ← replace title; wrap part in <em> for italic accent -->
+    <h1>Again...</h1>
+
+    <!-- ← replace subtitle -->
+    <p class="article-subtitle">A short, punchy description of what this post is about.</p>
+
+    <div class="author-row">
+      <div class="author">
+        <!-- swap the emoji for <img src="photo.jpg"> if you have a photo -->
+        <div class="avatar">🧑‍💻</div>
+        <div>
+          <div class="author-name">Sathwik M S</div>         <!-- ← replace -->
+          <div class="author-handle">@_sathvvik</div>     <!-- ← replace -->
+        </div>
+      </div>
+      <div class="article-stats">
+        <span class="article-stat">⏱ 7 min read</span>    <!-- ← replace -->
+      </div>
+    </div>
+  </div>
+
+  <!-- HERO IMAGE -->
+  <div class="hero-image">
+    <img src="your-image.jpg" alt="Describe the image" />
+  </div>
+
+  
+  <article class="article-body" id="article-body">
+
+
+  </article>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-inner">
+      <!-- ← replace with your blog name -->
+      <span class="footer-brand">sathwik<span style="color:var(--accent)">.</span>blog</span>
+      <span class="footer-copy">// crafted with curiosity · 2025 · <a href="https://www.sathwikms.site/">Sathwik M S</a></span>
+    </div>
+  </footer>
+
+  <script src="/js/toggle.js"></script>
+
+</body>
+</html>

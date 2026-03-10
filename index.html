@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>the.blog</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Mono:wght@400;500&family=DM+Sans:wght@300;400;500&display=swap"
+    rel="stylesheet" />
+  <style>
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --bg: #f5f0e8;
+      --bg2: #ede8df;
+      --card: #faf7f2;
+      --text: #1a1208;
+      --text-muted: #6b5e45;
+      --accent: #c84b2f;
+      --accent2: #3a6b9f;
+      --border: #d4c9b5;
+      --tag-tech: #dceaf7;
+      --tag-tech-text: #1a4a78;
+      --tag-personal: #fde8e4;
+      --tag-personal-text: #8b2714;
+      --shadow: 0 2px 20px rgba(0, 0, 0, 0.08);
+      --shadow-hover: 0 8px 40px rgba(0, 0, 0, 0.14);
+    }
+
+    [data-theme="dark"] {
+      --bg: #0e0e0f;
+      --bg2: #161618;
+      --card: #1c1c1f;
+      --text: #f0ede6;
+      --text-muted: #8a8480;
+      --accent: #e8694e;
+      --accent2: #5b9fd4;
+      --border: #2e2d2b;
+      --tag-tech: #162030;
+      --tag-tech-text: #7ab8e8;
+      --tag-personal: #250f0c;
+      --tag-personal-text: #e88070;
+      --shadow: 0 2px 20px rgba(0, 0, 0, 0.4);
+      --shadow-hover: 0 8px 40px rgba(0, 0, 0, 0.6);
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      transition: background 0.4s, color 0.4s;
+      min-height: 100vh;
+    }
+
+    /* ── HEADER ── */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--bg);
+      border-bottom: 1px solid var(--border);
+      padding: 0 clamp(1rem, 5vw, 4rem);
+      transition: background 0.4s;
+    }
+
+    .header-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 64px;
+    }
+
+    .logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5rem;
+      font-weight: 900;
+      color: var(--text);
+      text-decoration: none;
+      letter-spacing: -0.02em;
+    }
+
+    .logo span {
+      color: var(--accent);
+    }
+
+    nav {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .nav-btn {
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: var(--text-muted);
+      padding: 0.4rem 0.9rem;
+      border-radius: 100px;
+      transition: all 0.2s;
+    }
+
+    .nav-btn:hover {
+      color: var(--text);
+      background: var(--bg2);
+    }
+
+    .nav-btn.active {
+      color: var(--text);
+      background: var(--bg2);
+      font-weight: 600;
+    }
+
+    .theme-toggle {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      cursor: pointer;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+      transition: all 0.2s;
+      margin-left: 0.5rem;
+    }
+
+    .theme-toggle:hover {
+      transform: rotate(20deg) scale(1.1);
+    }
+
+    /* ── HERO ── */
+    .hero {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 5rem clamp(1rem, 5vw, 4rem) 3rem;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: end;
+      gap: 2rem;
+    }
+
+    .hero-eyebrow {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.75rem;
+      color: var(--accent);
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      margin-bottom: 0.75rem;
+    }
+
+    .hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      font-weight: 900;
+      line-height: 1.1;
+      letter-spacing: -0.03em;
+      color: var(--text);
+    }
+
+    .hero h1 em {
+      font-style: italic;
+      color: var(--accent);
+    }
+
+    .hero-desc {
+      margin-top: 1.2rem;
+      font-size: 1rem;
+      color: var(--text-muted);
+      max-width: 480px;
+      line-height: 1.7;
+    }
+
+    .hero-stats {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 1rem;
+    }
+
+    .stat {
+      text-align: right;
+      font-family: 'DM Mono', monospace;
+    }
+
+    .stat-num {
+      font-size: 2rem;
+      font-weight: 500;
+      line-height: 1;
+      color: var(--text);
+    }
+
+    .stat-label {
+      font-size: 0.7rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+
+    /* ── SEARCH ── */
+    .search-wrap {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 clamp(1rem, 5vw, 4rem) 1.5rem;
+    }
+
+    .search-input {
+      width: 100%;
+      max-width: 420px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 100px;
+      padding: 0.6rem 1.2rem;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.88rem;
+      color: var(--text);
+      outline: none;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+
+    .search-input::placeholder {
+      color: var(--text-muted);
+    }
+
+    .search-input:focus {
+      border-color: var(--text-muted);
+      box-shadow: 0 0 0 3px rgba(128, 128, 128, 0.1);
+    }
+
+    /* ── FILTER PILLS ── */
+    .filter-bar {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 clamp(1rem, 5vw, 4rem) 2.5rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .filter-label {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.7rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+    }
+
+    .filter-pills {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+    }
+
+    .pill {
+      padding: 0.35rem 1rem;
+      border-radius: 100px;
+      font-size: 0.82rem;
+      font-weight: 500;
+      cursor: pointer;
+      border: 1px solid var(--border);
+      background: transparent;
+      color: var(--text-muted);
+      transition: all 0.2s;
+    }
+
+    .pill:hover {
+      border-color: var(--text-muted);
+      color: var(--text);
+    }
+
+    .pill.active-all {
+      background: var(--text);
+      color: var(--bg);
+      border-color: var(--text);
+    }
+
+    .pill.active-tech {
+      background: var(--tag-tech);
+      color: var(--tag-tech-text);
+      border-color: var(--tag-tech-text);
+    }
+
+    .pill.active-personal {
+      background: var(--tag-personal);
+      color: var(--tag-personal-text);
+      border-color: var(--tag-personal-text);
+    }
+
+    /* ── GRID ── */
+    .grid-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 clamp(1rem, 5vw, 4rem) 5rem;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+      gap: 1.5rem;
+    }
+
+    /* ── CARD ── */
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 1.75rem;
+      cursor: pointer;
+      transition: box-shadow 0.3s, transform 0.3s, border-color 0.3s;
+      box-shadow: var(--shadow);
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      position: relative;
+      overflow: hidden;
+      animation: fadeUp 0.4s ease both;
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: transparent;
+      transition: background 0.3s;
+    }
+
+    .card.tech::before {
+      background: var(--accent2);
+    }
+
+    .card.personal::before {
+      background: var(--accent);
+    }
+
+    .card:hover {
+      box-shadow: var(--shadow-hover);
+      transform: translateY(-4px);
+      border-color: var(--text-muted);
+    }
+
+    .card-meta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .tag {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.68rem;
+      font-weight: 500;
+      padding: 0.2rem 0.65rem;
+      border-radius: 100px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .tag.tech {
+      background: var(--tag-tech);
+      color: var(--tag-tech-text);
+    }
+
+    .tag.personal {
+      background: var(--tag-personal);
+      color: var(--tag-personal-text);
+    }
+
+    .card-date {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.7rem;
+      color: var(--text-muted);
+    }
+
+    .card h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.25rem;
+      font-weight: 700;
+      line-height: 1.3;
+      letter-spacing: -0.01em;
+      color: var(--text);
+    }
+
+    .card p {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      line-height: 1.65;
+    }
+
+    .card-footer {
+      margin-top: auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-top: 1rem;
+      border-top: 1px solid var(--border);
+    }
+
+    .read-time {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.7rem;
+      color: var(--text-muted);
+    }
+
+    .read-link {
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--text);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 0.3rem;
+      transition: gap 0.2s;
+    }
+
+    .card:hover .read-link {
+      gap: 0.55rem;
+    }
+
+    /* ── FEATURED CARD ── */
+    .card.featured {
+      grid-column: span 2;
+      flex-direction: row;
+      gap: 2rem;
+      align-items: stretch;
+    }
+
+    .featured-content {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .featured-content h2 {
+      font-size: 1.75rem;
+    }
+
+    .featured-visual {
+      width: 220px;
+      min-height: 180px;
+      border-radius: 10px;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 4rem;
+    }
+
+    .card.tech .featured-visual {
+      background: var(--tag-tech);
+    }
+
+    .card.personal .featured-visual {
+      background: var(--tag-personal);
+    }
+
+    /* ── EMPTY STATE ── */
+    .empty-state {
+      grid-column: 1 / -1;
+      text-align: center;
+      padding: 4rem 2rem;
+      color: var(--text-muted);
+      font-family: 'Playfair Display', serif;
+      font-size: 1.2rem;
+      font-style: italic;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      border-top: 1px solid var(--border);
+      background: var(--bg2);
+      padding: 2rem clamp(1rem, 5vw, 4rem);
+    }
+
+    .footer-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .footer-brand {
+      font-family: 'Playfair Display', serif;
+      font-weight: 900;
+      font-size: 1.1rem;
+    }
+
+    .footer-copy {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      font-family: 'DM Mono', monospace;
+    }
+
+    /* ── ANIMATION ── */
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(16px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .card:nth-child(2) {
+      animation-delay: 0.06s;
+    }
+
+    .card:nth-child(3) {
+      animation-delay: 0.12s;
+    }
+
+    .card:nth-child(4) {
+      animation-delay: 0.18s;
+    }
+
+    .card:nth-child(5) {
+      animation-delay: 0.24s;
+    }
+
+    .card:nth-child(6) {
+      animation-delay: 0.30s;
+    }
+
+    @media (max-width: 720px) {
+      .card.featured {
+        grid-column: span 1;
+        flex-direction: column;
+      }
+
+      .featured-visual {
+        width: 100%;
+        min-height: 120px;
+      }
+
+      .hero {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-stats {
+        flex-direction: row;
+        align-items: center;
+      }
+
+      nav {
+        display: none;
+      }
+    }
+
+    .acard {
+      text-decoration: none;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- HEADER -->
+  <header>
+    <div class="header-inner">
+      <!-- ← replace with your blog name -->
+      <a href="#" class="logo">sathwik<span>.</span>blog</a>
+      <nav>
+        <button class="nav-btn active" onclick="setSection('all', this)">All Posts</button>
+        <button class="nav-btn" onclick="setSection('tech', this)">Technical</button>
+        <button class="nav-btn" onclick="setSection('personal', this)">Personal</button>
+
+      </nav>
+      <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">
+        <span id="theme-icon">🌙</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <div class="hero">
+    <div>
+      <!-- ← replace tagline -->
+      <p class="hero-eyebrow">// est. 2025</p>
+      <h1>My Ideas,<br /><em>Thoughts.</em></h1>
+    </div>
+
+  </div>
+
+  <!-- FILTER PILLS -->
+  <div class="filter-bar">
+    <span class="filter-label">Filter:</span>
+    <div class="filter-pills">
+      <button class="pill active-all" onclick="setPill('all', this)">All</button>
+      <button class="pill" onclick="setPill('tech', this)">⚙️ Technical</button>
+      <button class="pill" onclick="setPill('personal', this)">✍️ Personal</button>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════ -->
+  <!--   CARDS — add yours below. Copy a snippet and fill in.  -->
+  <!-- ═══════════════════════════════════════════════════════ -->
+  <div class="grid-container" id="grid">
+
+    <!-- <div class="card tech" data-category="tech" data-title="lowercase searchable title">
+      <div class="card-meta">
+        <span class="tag tech">Technical</span>
+        <span class="card-date">Month DD, YYYY</span>
+      </div>
+      <h2>Your Post Title Here</h2>
+      <p>A one or two sentence summary of the post.</p>
+      <div class="card-footer">
+        <span class="read-time">⏱ X min read</span>
+        <a class="read-link" href="blog-template.html">Read more →</a>
+      </div>
+    </div> -->
+
+    <!-- For a personal post, swap every "tech" above for "personal": -->
+
+    <div class="card personal" data-category="personal" data-title="lowercase searchable title">
+      <div class="card-meta">
+        <span class="tag personal">Personal</span>
+        <span class="card-date">October 01, 2025</span>
+      </div>
+      <h2>About my web Development journey.</h2>
+      <p>Discussing How I Got Interested in Development.</p>
+      <div class="card-footer">
+        <span class="read-time">⏱ 10 min read</span>
+        <a class="read-link" href="/personal/about-my-web-dev-journey/">Read more →</a>
+      </div>
+    </div>
+
+    <div class="card personal" data-category="personal" data-title="lowercase searchable title">
+      <div class="card-meta">
+        <span class="tag personal">Personal</span>
+        <span class="card-date">December 31, 2025</span>
+      </div>
+      <h2>2025!</h2>
+      <p>2025 -> 2026.</p>
+      <div class="card-footer">
+        <span class="read-time">⏱ 10 min read</span>
+        <a class="read-link" href="/personal/2025/">Read more →</a>
+      </div>
+    </div>
+
+    <div class="card personal" data-category="personal" data-title="lowercase searchable title">
+      <div class="card-meta">
+        <span class="tag personal">Personal</span>
+        <span class="card-date">March 10, 2026</span>
+      </div>
+      <h2>Again...</h2>
+      <p>Not required.</p>
+      <div class="card-footer">
+        <span class="read-time">⏱ 7 min read</span>
+        <a class="read-link" href="/personal/again/">Read more →</a>
+      </div>
+    </div>
+
+
+    <!-- Empty state shown when no cards exist or search finds nothing -->
+    <div class="empty-state" id="empty-state">
+      No posts found!
+    </div>
+
+  </div>
+  <!-- ═══════════════════════════════════════════════════════ -->
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-inner">
+      <!-- ← replace with your blog name -->
+      <span class="footer-brand">sathwik<span style="color:var(--accent)">.</span>blog</span>
+      <span class="footer-copy">// crafted with curiosity · 2025 · <a href="https://www.sathwikms.site/">Sathwik M
+          S</a></span>
+    </div>
+  </footer>
+
+  <script src="/js/index.js"></script>
+
+</body>
+
+</html>
